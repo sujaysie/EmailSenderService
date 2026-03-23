@@ -8,3 +8,21 @@ This repository contains a scaffolded multi-module Spring Boot implementation of
 - `shared-model`: shared Kafka event contracts.
 
 The project is intentionally structured around the design supplied in the task so each service can evolve independently.
+
+
+## React UI
+
+A standalone React dashboard is available in `ui/` and mirrors the MailFlow platform view from the provided mockup.
+
+```bash
+cd ui
+npm install
+npm run dev
+```
+
+Create a production bundle with:
+
+```bash
+cd ui
+npm run build
+```
