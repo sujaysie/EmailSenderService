@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: email-engine
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: email-engine-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.example.emailsender.shared.event
+    listener:
+      ack-mode: manual_immediate
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      timeout: 2s
+  mail:
+    host: localhost
+    port: 1025
+    username: dummy-user
+    password: dummy-pass
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+
+server:
+  port: 8083
+
+app:
+  dummy-data:
+    redis-keys:
+      - "idem:evt-dummy-1001"
+      - "idem:evt-dummy-1002"
+    kafka-events:
+      - "evt-dummy-1001"
+      - "evt-dummy-1002"
+
+logging:
+  level:
+    com.example.emailsender.engine: INFO
